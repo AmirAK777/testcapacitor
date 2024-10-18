@@ -1,4 +1,4 @@
-import { Partner } from "./Partner";
+import { Partner } from "./partner";
 
 export class Product {
     id!: string;
