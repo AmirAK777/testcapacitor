@@ -1,0 +1,92 @@
+@import 'ngx-toastr/toastr'
+    
+@font-face
+    font-family: 'Sophia'
+    src: url('./assets/fonts/SofiaProBold.otf') format('opentype')
+    font-weight: bold
+    font-style: normal
+
+@font-face
+    font-family: 'Sophia'
+    src: url('./assets/fonts/SofiaProRegular.otf') format('opentype')
+    font-weight: normal
+    font-style: normal
+
+@font-face
+    font-family: 'Sophia'
+    src: url('./assets/fonts/SofiaProUltraLight.otf') format('opentype')
+    font-weight: lighter
+    font-style: normal
+
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+body
+    font-family: 'Sophia'
+
+
+.inputBox
+    position: relative
+    width: 80%
+    max-width: 300px
+
+.inputBox input
+    width: 100%
+    outline: none
+    font-size: 1em
+    font-weight: normal
+    padding: 10px 0
+    padding-left: 10px
+    border-radius: 4px
+    border: solid 1px #dadada
+    color: #848484
+
+.inputBox span
+    color: #848484
+    position: absolute
+    left: 0
+    top: 0
+    pointer-events: none
+    font-size: 1em
+    z-index: 1111
+    padding: 10px 5px
+    transition: 0.5s
+
+.inputBox input[required] > span::after
+    content: " *"
+    color: red
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span
+    transform: translateX(10px) translateY(-7px)
+    font-size: 1em
+    padding: 0 10px
+    background-color: white
+    border-radius: 5px
+
+.inputBox input:focus
+    box-shadow: 0 0 5px 0 #4b61fc
+
+.inputBox input.ng-touched.ng-invalid
+    box-shadow: 0 0 5px 0 red
+
+.inputBox input.ng-touched.ng-valid
+    box-shadow: 0 0 5px 0 green
+
+button.clovis-btn
+    width: 80%
+    padding: 1em
+    color: white
+    border-radius: 25px
+    border: none
+
+    & > span
+        font-size: 1.3em
+        font-weight: bolder
+
+button.clovis-btn:disabled
+    background-color: lightgray !important
+    cursor: not-allowed

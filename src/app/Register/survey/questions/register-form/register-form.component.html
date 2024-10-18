@@ -1,0 +1,100 @@
+<form #registerForm="ngForm" class="container" (ngSubmit)="registerCustomer()">
+    <div class="header">
+        <h1 [style.color]="color">{{question.header}}</h1>
+    </div>
+
+    <div class="inputBox">
+        <input type="text" required 
+        name="firstname"
+        #firstname="ngModel"
+        [(ngModel)]="userCopy.firstName"
+        pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\-]+$">
+        <span>Prénom</span>
+        <div *ngIf="firstname.invalid && firstname.touched" style="color: red;">
+            Prénom invalide
+        </div>
+    </div>
+    <div class="inputBox">
+        <input type="text" required 
+        name="lastname" 
+        [(ngModel)]="userCopy.lastName"
+        #lastname="ngModel"
+        pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\-]+$">
+        <span>Nom</span>
+        <div *ngIf="lastname.invalid && lastname.touched" style="color: red;">
+            Nom invalide
+        </div>
+    </div>
+    <div class="inputBox">
+        <input type="email" 
+            required name="email" #email="ngModel"
+            [(ngModel)]="userCopy.email"
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+        <span>Email</span>
+        <div *ngIf="email.invalid && email.touched" style="color: red;">
+            Email invalide
+        </div>
+    </div>
+    <div class="inputBox">
+        <input type="tel" required 
+        name="phonenumber" 
+        [(ngModel)]="userCopy.phoneNumber"
+        pattern="^(?:33|0)[1-9]\d{8}$"
+        #phonenumber="ngModel"
+        maxlength="11">
+        <span>Téléphone portable</span>
+        <div *ngIf="phonenumber.invalid && phonenumber.touched" style="color: red;">
+            Téléphone portable invalide
+        </div>
+    </div>
+    <div class="inputBox">
+        <input type="text" required 
+        name="zipcode" 
+        [(ngModel)]="userCopy.zipCode"
+        pattern="^\d{5}$"
+        #zipcode="ngModel">
+        <span>Code postal</span>
+        <div *ngIf="zipcode.invalid && zipcode.touched" style="color: red;">
+            Code postal invalide
+        </div>
+    </div>
+
+    <div class="checkbox">
+        <input type="checkbox" id="cgu" 
+        required
+        name="acceptedCgu"
+        ngModel>
+        <label for="cgu">
+            J’accepte que CARE SAS collecte mes données personnelles aux fins de pouvoir me contacter (par email et
+            téléphone) pour m’aider à optimiser ma situation fiscale et financière.
+        </label>
+    </div>
+
+
+    <section class="trustpilot">
+        <img src="https://res.cloudinary.com/dyewhr2lj/image/upload/v1727284557/Campagne%20marketing/noteTrustPilot.webp"
+            alt="trustpilot">
+    </section>
+
+    <section class="rgpd">
+        <img src="https://res.cloudinary.com/dyewhr2lj/image/upload/v1720877304/Ic%C3%B4nes%20et%20illustrations/icons%20survey/CNIL.jpg"
+            alt="CNIL">
+        <img src="https://res.cloudinary.com/dyewhr2lj/image/upload/v1720877304/Ic%C3%B4nes%20et%20illustrations/icons%20survey/RGPD.png"
+            alt="RGPD">
+    </section>
+
+    <section class="legal">
+        <span>Nous respectons la confidentialité et la sécurité de vos données</span>
+        <span>En cliquant sur « Accéder à mon résultat », je reconnais avoir pris connaissance et accepté les
+            conditions générales.
+            Les données personnelles communiquées sont uniquement utilisées pour permettre l’utilisation des
+            services Clovis.
+            Pour plus d’informations, consultez notre charte de confidentialité.</span>
+    </section>
+
+    <button type="submit" class="clovis-btn"
+        [disabled]="!registerForm.form.valid"
+        [style.background-color]="color">
+        <span>Voir mes résultats</span>
+    </button>
+</form>

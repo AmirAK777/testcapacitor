@@ -1,0 +1,65 @@
+<div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2>Voulez-vous continuer votre inscription ?</h2>
+        <div class="modal-button">
+            <button class="continued clovis-btn" [style.background-color]="campaign?.color"
+                (click)="closeModal()">Reprendre le formulaire</button>
+            <button class="restart clovis-btn" (click)="resetSurvey()">Nouveau formulaire</button>
+        </div>
+    </div>
+</div>
+
+<div [ngClass]="{'blur': isModalOpen}">
+    <div class="container-navigation">
+        <div class="container">
+            <div class="arrow">
+                <button [disabled]="indexQuestion === 0" (click)="indexQuestion = indexQuestion - 1">
+                    <span class="material-symbols-outlined">
+                        arrow_back
+                    </span>
+                </button>
+            </div>
+
+            <div class="logo-container">
+                <img src="{{campaign?.product?.partner?.logoPath}}" alt="logo">
+            </div>
+
+            <div class="arrow">
+            </div>
+        </div>
+
+        <div class="container-progress-bar">
+            <clovis-progress-bar [progress]="this.indexQuestion / this.campaign?.questions!.length! * 100"
+                [color]="campaign?.color!"></clovis-progress-bar>
+        </div>
+    </div>
+
+    <div class="container-answers">
+        @if (campaign !== undefined && indexQuestion < campaign.questions.length) {
+            @switch(campaign.questions[indexQuestion].referenceQuestionName) { @case ("INSCRIPTION_FORM") {
+            <clovis-register-form [question]="campaign.questions[indexQuestion]" [color]="campaign.color"
+            (registerFormCompleted)="setNextQuestion()">
+            </clovis-register-form>
+            }
+
+            @case ("VALIDATION_SMS") {
+            <clovis-security-sms-code [question]="campaign.questions[indexQuestion]" [color]="campaign.color"
+                (validationCodeDone)="setNextQuestion()">
+            </clovis-security-sms-code>
+            }
+
+            @case ("PASSWORD_CREATION"){
+            <clovis-create-password [question]="campaign.questions[indexQuestion]" [color]="campaign.color"
+                (accountCreated)="setNextQuestion()">
+            </clovis-create-password>
+            }
+
+            @default {
+            <clovis-questions [question]="campaign.questions[indexQuestion]" [color]="campaign.color"
+                (answerSubmitted)="setAnswerSelected($event)">
+            </clovis-questions>
+            }
+            }
+            }
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<form #codeSmsForm="ngForm" class="container" (ngSubmit)="sendCodeValidation()">
+    <h1 [style.color]="color">{{question.header}}</h1>
+
+    <div class="question">
+        <p *ngIf="question.subText !== undefined">{{question.subText}}</p>
+    </div>
+
+    <div class="inputBox">
+        <input type="text" 
+            required 
+            name="code"
+            pattern="^\d{4}$"
+            #code="ngModel"
+            [(ngModel)]="codeSms">
+        <span>Code de sécurité</span>
+        <div *ngIf="code.invalid && code.touched" style="color: red;">
+            Code invalide
+        </div>
+    </div>
+
+    <span class="hint">Vous n’avez reçu le code par téléphone ?</span>
+
+    <button type="submit" class="clovis-btn" 
+    [style.background-color]="color"
+    [disabled]="!codeSmsForm.valid">
+        <span>Valider</span>
+    </button>
+</form>

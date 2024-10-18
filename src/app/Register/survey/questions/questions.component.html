@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="header">
+        <h1 [style.color]="color">{{question.header}}</h1>
+    </div>
+
+    <div class="question">
+        <h2 *ngIf="question.name !== undefined" [innerHTML]="question.name"></h2>
+        <p *ngIf="question.subText !== undefined">{{question.subText}}</p>
+    </div>
+
+    <div class="timer">
+        <p>15s Simulation personnalisée</p>
+    </div>
+</div>
+
+@if (question.answers !== undefined && question.answers.length > 1) {
+<div class="answer-container">
+    @for (answer of question.answers; track $index) {
+    <clovis-answer-multi-chooses [answer]="answer" [color]="color" [isSelected]="isAnswerSelected(answer)"
+        (answerTriggered)="setAnswerSelected($event)"></clovis-answer-multi-chooses>
+    }
+</div>
+}
+
+<section class="container-secured">
+    <div class="secured">
+        <span>Formulaire sécurisé</span>
+    </div>
+</section>
+
+<section class="trustpilot">
+    <img src="https://res.cloudinary.com/dyewhr2lj/image/upload/v1727284557/Campagne%20marketing/noteTrustPilot.webp"
+        alt="trustpilot">
+</section>

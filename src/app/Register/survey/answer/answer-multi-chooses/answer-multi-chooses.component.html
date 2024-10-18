@@ -1,0 +1,6 @@
+<div class="card" [ngClass]="{'selected': isSelected}" [style.border-color]="color" (click)="sendAnswer(answer.responseValue)">
+    <svg-icon src="{{answer.imageUrl}}" [svgStyle]="{'fill': color}"></svg-icon>
+    <div class="footer" [style.background-color]="color">
+        <span>{{answer.responseText}}</span>
+    </div>
+</div>
